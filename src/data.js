@@ -1395,4 +1395,4 @@ const airports = [
 
 ];
 
-export default {routes, airlines, airports};
+export default { routes, airlines, airports };
