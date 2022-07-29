@@ -1,6 +1,7 @@
 import React from 'react';
+import { getAirlineById, getAirportByCode } from '../data';
 
-const RouteTable = ({ data: { routes, airlines, airports } }) => {
+const RouteTable = ({ data: { routes } }) => {
   return (
     <table className='routes-table'>
       <thead>
@@ -12,15 +13,11 @@ const RouteTable = ({ data: { routes, airlines, airports } }) => {
       </thead>
       <tbody>
         {routes.map((route) => {
-          const airline = airlines.find(({id}) => id === route.airline);
-          const source = airports.find(({code}) => code === route.src);
-          const dest = airports.find(({code}) => code === route.dest);
-
           return (
             <Route key={`${route.airline}${route.src}${route.dest}`}
-                   airline={airline}
-                   source={source}
-                   dest={dest}
+                   airline={getAirlineById(route.airline)}
+                   source={getAirportByCode(route.src)}
+                   dest={getAirportByCode(route.dest)}
             />
           );
         })}
