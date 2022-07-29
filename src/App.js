@@ -12,6 +12,9 @@ const App = () => {
       <h1 className="title">Airline Routes</h1>
     </header>
     <section>
+      <div>
+        Show routes on <select></select>
+      </div>
       <RouteTable routes={data.routes} perPage={25} />
     </section>
   </div>
