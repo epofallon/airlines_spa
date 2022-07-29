@@ -3,6 +3,8 @@ import data from './data';
 import RouteTable from './components/RouteTable';
 import './App.css';
 
+
+
 const App = () => {
   return (
     <div className="app">
@@ -10,7 +12,7 @@ const App = () => {
       <h1 className="title">Airline Routes</h1>
     </header>
     <section>
-      <RouteTable data={data} />
+      <RouteTable routes={data.routes} perPage={25} />
     </section>
   </div>
   );
