@@ -2,32 +2,8 @@ import React, { useState } from 'react';
 import data, { getAirlineById, getAirportByCode } from './data';
 import RouteTable from './components/RouteTable';
 import Select from './components/Select';
+import Map from './components/Map';
 import './App.css';
-
-// const Map = () => {
-//   const x1 = 53.309700012200004;
-//   const y1 = -113.580001831;
-//   return (
-//     <svg className="map" viewBox="-180 -90 360 180">
-//       <g transform="scale(1 -1)">
-//         <image xlinkHref="equirectangular_world.jpg" href="equirectangular_world.jpg" x="-180" y="-90" height="100%" width="100%" transform="scale(1 -1)"/>
-        
-//         {/* for each route */}
-//         <g key="">
-//           <circle className="source" cx={x1} cy={y1}>
-//             <title></title>
-//           </circle> 
-//           <circle className="destination" cx={x1} cy={y1}>
-//             <title></title>
-//           </circle>
-//           <path d={`M${x1} ${y1} L ${x2} ${y2}`} />
-//         </g>
-//         {/* end route */}
-        
-//       </g>
-//     </svg>
-//   );
-// }
 
 const App = () => {
   const [airline, setAirline] = useState({ name: 'All Airlines', id: 0 });
@@ -77,7 +53,7 @@ const App = () => {
       <h1 className="title">Airline Routes</h1>
     </header>
     <section>
-      {/* <Map /> */}
+      <Map routes={filteredRoutes}  airports={data.airports}/>
 
       <div>
         Show routes on
