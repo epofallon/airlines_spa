@@ -2,18 +2,20 @@ import React, { useState } from 'react';
 import { getAirlineById, getAirportByCode } from '../data';
 
 const RouteTable = ({ routes, perPage }) => {
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(0);
   
-  const end = page * perPage;
-  const listRoutes = () => {
-    return routes.slice(end - perPage, end).map((route) => (
-      <Route key={`${route.airline}${route.src}${route.dest}`}
-             airline={getAirlineById(route.airline)}
-             src={getAirportByCode(route.src)}
-             dest={getAirportByCode(route.dest)}
-      />
-    ));
-  };
+  let start = page * perPage;
+  if (start > routes.length) setPage(0);
+  
+  const listRoutes = routes.slice(start, start + perPage).map((route) => (
+    <Route key={`${route.airline}${route.src}${route.dest}`}
+            airline={getAirlineById(route.airline)}
+            src={getAirportByCode(route.src)}
+            dest={getAirportByCode(route.dest)}
+    />
+  ));
+
+  let end = start + listRoutes.length
 
   return (
     <>
@@ -23,20 +25,20 @@ const RouteTable = ({ routes, perPage }) => {
             <th>Airline</th><th>Source Airport</th><th>Destination Airport</th>
           </tr>
         </thead>
-        <tbody>{listRoutes()}</tbody>
+        <tbody>{listRoutes}</tbody>
       </table>
 
-      <Info start={end - perPage + 1} end={end} total={routes.length} />
+      <Info start={start + 1} end={end} total={routes.length} />
 
       <button className='pagination'
               onClick={() => setPage(page - 1)}
-              disabled={end - perPage === 0}>
+              disabled={page === 0}>
         Previous Page
       </button>
 
       <button className='pagination'
               onClick={() => setPage(page + 1)}
-              disabled={end === routes.length}>
+              disabled={(end) === routes.length}>
         Next Page
       </button>
     </>
